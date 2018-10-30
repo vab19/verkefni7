@@ -1,19 +1,12 @@
-/**
- * Verkefni 7 – Reikniæfingarforrit
- *
- * Forrit sem æfir hraða í að reikna einföld dæmi
- */
 
-// fasti sem segir til um hve marga leiki eigi að spila
 const GAMES_TO_PLAY = 10;
 
-/**
- * Birtir upplýsingar um leik og eftir að notandi samþykkir spilar fyrsta leik
- * með kalli í play().
- * Eftir leik er notanda boðið að spila annan leik, ef ekki hættir forrit.
- */
+
+
 function start() {
-  villa;
+  alert('Markmiðið er að svara eins mörgum af 10 dæmum rétt eins hratt og mögulegt er.');
+  play();
+  
 }
 
 /**
@@ -24,10 +17,29 @@ function start() {
  * Þar sem Y og Z hafa tvo aukastafi.
  *
  * Ef notandi ýtir á "Cancel" í leik eru skilaboðin "Hætt í leik." birt og engar
- * upplsýingar um niðurstöður.
+ * upplýsingar um niðurstöður.
  *
  */
 function play() {
+  let rsvör = 0;
+  const start = new Date();
+  for (i = 0; i < 10; i++) { 
+    let svarid = ask();
+    if(svarid===null){haetta();}
+    else if(svarid){
+      rsvör += 1;
+    }
+   
+}
+  
+  const finish = new Date();
+  
+  if(rsvör != -1){
+    alert(`Þú svaraðir ${(rsvör)} af 10 dæmum rétt á ${(finish-start)/1000} sekúndum\nMeðalrétt svör á sekúndu eru ${(((rsvör)/((finish-start)/1000))).toFixed(2)}`);
+    spilaAnnan();
+  }
+  
+  
 }
 
 /**
@@ -45,6 +57,41 @@ function play() {
  * Sniðugt væri að færa það að búa til spurningu í nýtt fall sem ask() kallar í.
  */
 function ask() {
+  const operators2 = ['+', '-', '*', '/'];
+  const whatNow = operators2[randomNumber(0, 3)];
+  const rando = randomNumber(1,100);
+  const rando1 = randomNumber(1,100);
+  const rando2 = randomNumber(2,10);
+  const rando3 = rando2*randomNumber(2,10);
+  const rando4 = randomNumber(1,10);
+  const rando5 = randomNumber(1,10);
+  let rettsvar = 0;
+  let svar = 1;
+ 
+  switch(whatNow){
+     case '+':
+       rettsvar = rando + rando1;
+       svar = prompt('Hvað er ' + rando + '+' + rando1);
+       break;
+     case '-':
+       rettsvar = rando - rando1;
+       svar = prompt('Hvað er ' + rando + '-' + rando1);
+       break;
+     case '*': 
+       rettsvar = rando4*rando5;
+       svar = prompt('Hvað er ' + rando4 + '*' + rando5);
+       break;
+     case '/':
+       rettsvar = rando3/rando2;
+       svar = prompt('Hvað er ' + rando3 + '/' + rando2);
+       break;
+     default:
+      break;
+     
+  }
+  if(svar === null){haetta();return null();}
+  if(rettsvar === parseInt(svar))return true;
+  else return false;
 }
 
 /**
@@ -53,6 +100,18 @@ function ask() {
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function spilaAnnan(){
+  let doesAgree = confirm('Spila annan leik?');
+  if(doesAgree){start();}
+ 
+}
+function haetta(){
+  alert('Hætt í leik.');
+  spilaAnnan();
+}
+
+
 
 // Byrjar leik
 start();
