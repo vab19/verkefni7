@@ -103,7 +103,7 @@ function randomNumber(min, max) {
 
 function spilaAnnan(){
   let doesAgree = confirm('Spila annan leik?');
-  if(doesAgree){start();}
+  if(doesAgree){play();}
  
 }
 function haetta(){
